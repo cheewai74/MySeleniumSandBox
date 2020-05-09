@@ -18,4 +18,9 @@ public class googleSearchExampleTest extends BaseTest {
     public void googleHuskies(){
         googleSearchesFor("Huskies");
     }
+
+    @Test
+    public void googleKittens(){
+        googleSearchesFor("Kittens");
+    }
 }

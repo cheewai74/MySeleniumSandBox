@@ -20,7 +20,6 @@ public class BaseTest {
         driver.get("http://google.com");
     }
 
-    // -- Commit --
     public void googleSearchesFor(final String searchString) {
         WebElement searchField = driver.findElement(By.name("q"));
         searchField.clear();
