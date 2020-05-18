@@ -4,9 +4,15 @@ import okio.Timeout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
+
+import static junit.framework.Assert.assertEquals;
 
 public class Form {
 
@@ -18,7 +24,7 @@ public class Form {
 
         driver.get("https://formy-project.herokuapp.com/form");
 
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+       // driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
        // id  first-name
         driver.findElement(By.id("first-name")).sendKeys("Moses");
         driver.findElement(By.id("last-name")).sendKeys("Wong");
@@ -32,6 +38,13 @@ public class Form {
 
         // Annotate each class by adding the dot
         driver.findElement(By.cssSelector(".btn.btn-lg.btn-primary")).click();
+
+        //alert alert-success => alert.alert-success
+        WebDriverWait wait = new WebDriverWait(driver, 10 );
+        WebElement alert = wait.until((ExpectedConditions.visibilityOfElementLocated(By.className("alert"))));
+
+        String alertText = alert.getText();
+        assertEquals("The form was successfully submitted!", alertText);
         driver.quit();
     }
 }
