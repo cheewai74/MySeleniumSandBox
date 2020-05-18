@@ -1,5 +1,7 @@
 package GoogleSearch;
 
+import Pages.Confirmation;
+import Pages.FormPage;
 import okio.Timeout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -24,7 +26,10 @@ public class Form {
 
         driver.get("https://formy-project.herokuapp.com/form");
 
-        submitForm(driver);
+        // submitForm(driver);
+        FormPage formPage = new FormPage(driver);
+        formPage.submitForm(driver);
+
        // driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
        // id  first-name
         /*
@@ -46,14 +51,16 @@ public class Form {
        // WebDriverWait wait = new WebDriverWait(driver, 10 );
        // WebElement alert = wait.until((ExpectedConditions.visibilityOfElementLocated(By.className("alert"))));
 
-        waitForAlertBanner(driver);
+        Confirmation confirmation = new Confirmation(driver);
+        confirmation.waitForAlertBanner(driver);
+       // waitForAlertBanner(driver);
 
         // String alertText = alert.getText();
         // assertEquals("The form was successfully submitted!", alertText);
-        assertEquals("The form was successfully submitted!", getAlertBannerText(driver));
+        assertEquals("The form was successfully submitted!", confirmation.getAlertBannerText(driver));
         driver.quit();
     }
-
+/*
     public static void submitForm(WebDriver driver){
 
         driver.findElement(By.id("first-name")).sendKeys("Moses");
@@ -80,6 +87,6 @@ public class Form {
     public static String getAlertBannerText(WebDriver driver){
         return driver.findElement(By.className("alert")).getText();
     }
-
+*/
 
 }
