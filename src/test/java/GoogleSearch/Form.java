@@ -24,8 +24,38 @@ public class Form {
 
         driver.get("https://formy-project.herokuapp.com/form");
 
+        submitForm(driver);
        // driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
        // id  first-name
+        /*
+        driver.findElement(By.id("first-name")).sendKeys("Moses");
+        driver.findElement(By.id("last-name")).sendKeys("Wong");
+        driver.findElement(By.id("job-title")).sendKeys("Software Engineer");
+        driver.findElement(By.id("radio-button-2")).click();
+        driver.findElement(By.id("checkbox-1")).click();
+        driver.findElement(By.cssSelector("option[value='1']")).click();
+
+        driver.findElement(By.id("datepicker")).sendKeys("05/18/2010");
+        driver.findElement(By.id("datepicker")).sendKeys(Keys.ENTER);
+
+        // Annotate each class by adding the dot
+        driver.findElement(By.cssSelector(".btn.btn-lg.btn-primary")).click();
+        */
+
+        //alert alert-success => alert.alert-success
+       // WebDriverWait wait = new WebDriverWait(driver, 10 );
+       // WebElement alert = wait.until((ExpectedConditions.visibilityOfElementLocated(By.className("alert"))));
+
+        waitForAlertBanner(driver);
+
+        // String alertText = alert.getText();
+        // assertEquals("The form was successfully submitted!", alertText);
+        assertEquals("The form was successfully submitted!", getAlertBannerText(driver));
+        driver.quit();
+    }
+
+    public static void submitForm(WebDriver driver){
+
         driver.findElement(By.id("first-name")).sendKeys("Moses");
         driver.findElement(By.id("last-name")).sendKeys("Wong");
         driver.findElement(By.id("job-title")).sendKeys("Software Engineer");
@@ -39,12 +69,17 @@ public class Form {
         // Annotate each class by adding the dot
         driver.findElement(By.cssSelector(".btn.btn-lg.btn-primary")).click();
 
-        //alert alert-success => alert.alert-success
-        WebDriverWait wait = new WebDriverWait(driver, 10 );
-        WebElement alert = wait.until((ExpectedConditions.visibilityOfElementLocated(By.className("alert"))));
-
-        String alertText = alert.getText();
-        assertEquals("The form was successfully submitted!", alertText);
-        driver.quit();
     }
+
+    public static void waitForAlertBanner(WebDriver driver){
+        WebDriverWait wait = new WebDriverWait(driver, 10 );
+        wait.until((ExpectedConditions.visibilityOfElementLocated(By.className("alert"))));
+        //string alertText = alert.getText();
+    }
+
+    public static String getAlertBannerText(WebDriver driver){
+        return driver.findElement(By.className("alert")).getText();
+    }
+
+
 }
